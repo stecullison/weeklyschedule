@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Weekly Schedule Planner</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      margin: 0;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    #topbar {
+      padding: 10px;
+      background-color: #f0f0f0;
+      border-bottom: 1px solid #ccc;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    #exportButton {
+      padding: 10px 15px;
+      background-color: #4caf50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    #studentName {
+      padding: 8px;
+      font-size: 14px;
+      width: 250px;
+    }
+
+    #main {
+      display: flex;
+      flex-grow: 1;
+      overflow: hidden;
+    }
+
+    #sidebar {
+      width: 300px;
+      background-color: #f4f4f4;
+      padding: 10px;
+      border-right: 1px solid #ccc;
+      box-sizing: border-box;
+      overflow-y: auto;
+    }
+
+    .class-block {
+      color: #000;
+      padding: 10px;
+      margin: 8px 0;
+      text-align: center;
+      border-radius: 6px;
+      cursor: grab;
+      font-weight: bold;
+    }
+
+    #schedule {
+      flex-grow: 1;
+      display: grid;
+      grid-template-columns: 80px repeat(5, 1fr);
+      grid-auto-rows: 60px;
+      border-collapse: collapse;
+      border-left: 1px solid #ccc;
+      border-top: 1px solid #ccc;
+      overflow: auto;
+    }
+
+    .cell {
+      border-right: 1px solid #ccc;
+      border-bottom: 1px solid #ccc;
+      position: relative;
+      background-color: #fff;
+    }
+
+    .cell-header {
+      background-color: #e0e0e0;
+      font-weight: bold;
+      text-align: center;
+      line-height: 60px;
+    }
+
+    .time-label {
+      background-color: #eeeeee;
+      text-align: center;
+      line-height: 60px;
+      font-weight: bold;
+    }
+
+    .dropped {
+      position: absolute;
+      top: 5px;
+      left: 5px;
+      right: 5px;
+      bottom: 5px;
+      background-color: #ffe082;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: bold;
+      cursor: move;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="topbar">
+    <input type="text" id="studentName" placeholder="Enter your name here" />
+    <button id="exportButton">Download Weekly Schedule (PDF)</button>
+  </div>
+
+  <div id="main">
+    <div id="sidebar">
+      <h3>Classes</h3>
+      <div class="class-block" draggable="true" style="background-color: #f8bbd0;">English 9</div>
+<div class="class-block" draggable="true" style="background-color: #f8bbd0;">English 10</div>
+<div class="class-block" draggable="true" style="background-color: #f8bbd0;">US Literature</div>
+<div class="class-block" draggable="true" style="background-color: #f8bbd0;">Speech (S1)</div>
+<div class="class-block" draggable="true" style="background-color: #f8bbd0;">Creative Writing (S1)</div>
+<div class="class-block" draggable="true" style="background-color: #f8bbd0;">World Literature (S2)</div>
+<div class="class-block" draggable="true" style="background-color: #f8bbd0;">Communications (S2) *not NCAA approved</div>
+<div class="class-block" draggable="true" style="background-color: #c5e1a5;">Physical Earth Science</div>
+<div class="class-block" draggable="true" style="background-color: #c5e1a5;">Chemistry</div>
+<div class="class-block" draggable="true" style="background-color: #c5e1a5;">Biology</div>
+<div class="class-block" draggable="true" style="background-color: #c5e1a5;">Forensics (S1)</div>
+<div class="class-block" draggable="true" style="background-color: #c5e1a5;">Science or Myth (S2)</div>
+<div class="class-block" draggable="true" style="background-color: #ffe082;">Cultural Geography</div>
+<div class="class-block" draggable="true" style="background-color: #ffe082;">World History</div>
+<div class="class-block" draggable="true" style="background-color: #ffe082;">US History</div>
+<div class="class-block" draggable="true" style="background-color: #ffe082;">US Government (S1)</div>
+<div class="class-block" draggable="true" style="background-color: #ffe082;">Economics (S2)</div>
+<div class="class-block" draggable="true" style="background-color: #ffe082;">Sociology (S1)</div>
+<div class="class-block" draggable="true" style="background-color: #ffe082;">Psychology (S2)</div>
+<div class="class-block" draggable="true" style="background-color: #b3e5fc;">Intermediate Algebra</div>
+<div class="class-block" draggable="true" style="background-color: #b3e5fc;">Geometry</div>
+<div class="class-block" draggable="true" style="background-color: #b3e5fc;">Algebra II</div>
+<div class="class-block" draggable="true" style="background-color: #b3e5fc;">College Algebra Prep</div>
+<div class="class-block" draggable="true" style="background-color: #b3e5fc;">Precalculus</div>
+<div class="class-block" draggable="true" style="background-color: #ffccbc;">Personal Wellness (S1 or S2)</div>
+<div class="class-block" draggable="true" style="background-color: #ffccbc;">Guided Wellness (S1 or S2)</div>
+<div class="class-block" draggable="true" style="background-color: #ffccbc;">Health (S1 or S2)</div>
+<div class="class-block" draggable="true" style="background-color: #d1c4e9;">Intro to Foods (S1 or S2)</div>
+<div class="class-block" draggable="true" style="background-color: #d1c4e9;">Child Psychology I (S1)</div>
+<div class="class-block" draggable="true" style="background-color: #d1c4e9;">Child Psychology II (S2)</div>
+<div class="class-block" draggable="true" style="background-color: #d1c4e9;">Interior Design (S1)</div>
+<div class="class-block" draggable="true" style="background-color: #d1c4e9;">Intro to Education (S1 or S2)</div>
+<div class="class-block" draggable="true" style="background-color: #d1c4e9;">Educational Experience (S1 or S2)</div>
+<div class="class-block" draggable="true" style="background-color: #f0f4c3;">Video Production (S2)</div>
+<div class="class-block" draggable="true" style="background-color: #f0f4c3;">Digital Photography (S1)</div>
+<div class="class-block" draggable="true" style="background-color: #b2dfdb;">Investing 101 (S2)</div>
+<div class="class-block" draggable="true" style="background-color: #b2dfdb;">Personal Finance (S1)</div>
+<div class="class-block" draggable="true" style="background-color: #b2dfdb;">Travel and Tourism (S2)</div>
+<div class="class-block" draggable="true" style="background-color: #b2dfdb;">Career Investigation (S1)</div>
+<div class="class-block" draggable="true" style="background-color: #eeeeee;">College Prep with AVID Strategies (S1 or S2)</div>
+<div class="class-block" draggable="true" style="background-color: #eeeeee;">Work Based Learning (S1, S2, or Full year)</div>
+
+    </div>
+
+    <div id="schedule"></div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script>
+    const days = ["Mon", "Tue", "Wed", "Thu", "Fri"];
+    const hours = ["8am", "9am", "10am", "11am", "12pm", "1pm", "2pm", "3pm", "4pm"];
+    const schedule = document.getElementById("schedule");
+
+    schedule.appendChild(document.createElement("div")); // empty corner
+    days.forEach(day => {
+      const div = document.createElement("div");
+      div.className = "cell cell-header";
+      div.textContent = day;
+      schedule.appendChild(div);
+    });
+
+    hours.forEach(hour => {
+      const timeDiv = document.createElement("div");
+      timeDiv.className = "cell time-label";
+      timeDiv.textContent = hour;
+      schedule.appendChild(timeDiv);
+
+      days.forEach(day => {
+        const cell = document.createElement("div");
+        cell.className = "cell";
+        cell.addEventListener("dragover", e => e.preventDefault());
+        cell.addEventListener("drop", handleDrop);
+        schedule.appendChild(cell);
+      });
+    });
+
+    let draggedClassName = "";
+
+    document.querySelectorAll(".class-block").forEach(block => {
+      block.addEventListener("dragstart", e => {
+        draggedClassName = e.target.textContent;
+      });
+    });
+
+    function handleDrop(e) {
+      if (!draggedClassName) return;
+      if (e.target.classList.contains("cell")) {
+        e.target.innerHTML = "";
+      }
+      const newBlock = document.createElement("div");
+      newBlock.className = "dropped";
+      newBlock.textContent = draggedClassName;
+      newBlock.setAttribute("draggable", "true");
+      newBlock.addEventListener("dragstart", e => {
+        draggedClassName = e.target.textContent;
+        e.target.parentNode.innerHTML = "";
+      });
+      e.target.appendChild(newBlock);
+    }
+
+    document.getElementById("exportButton").addEventListener("click", () => {
+      const name = document.getElementById("studentName").value.trim();
+      const opt = {
+        margin: 0.5,
+        filename: name ? name.replace(/\s+/g, "_").toLowerCase() + '_weekly_schedule.pdf' : 'weekly_schedule.pdf',
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2 },
+        jsPDF: { unit: 'in', format: 'letter', orientation: 'landscape' }
+      };
+      html2pdf().from(document.getElementById("schedule")).set(opt).save();
+    });
+  </script>
+
+</body>
+</html>
