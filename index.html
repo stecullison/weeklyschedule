@@ -12,7 +12,6 @@
       height: 100vh;
       overflow: hidden;
     }
-
     #topbar {
       padding: 10px;
       background-color: #f0f0f0;
@@ -21,7 +20,6 @@
       justify-content: space-between;
       align-items: center;
     }
-
     #exportButton {
       padding: 10px 15px;
       background-color: #4caf50;
@@ -31,19 +29,16 @@
       cursor: pointer;
       font-size: 14px;
     }
-
     #studentName {
       padding: 8px;
       font-size: 14px;
       width: 250px;
     }
-
     #main {
       display: flex;
       flex-grow: 1;
       overflow: hidden;
     }
-
     #sidebar-left, #sidebar-right {
       width: 250px;
       background-color: #f4f4f4;
@@ -51,84 +46,77 @@
       border-right: 1px solid #ccc;
       box-sizing: border-box;
       overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      align-content: flex-start;
     }
-
     #sidebar-right {
       border-left: 1px solid #ccc;
       border-right: none;
     }
-
     .class-block {
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      font-size: 11px;
-      padding: 5px;
-      margin: 3px 0;
-      line-height: 1.1;
+      font-size: 12px;
+      padding: 6px;
+      margin: 4px 0;
+      line-height: 1.2;
       color: #000;
-      padding: 10px;
-      margin: 8px 0;
       text-align: center;
       border-radius: 6px;
       cursor: grab;
       font-weight: bold;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
-
     #schedule {
       flex-grow: 1;
       display: grid;
       grid-template-columns: 80px repeat(7, 1fr);
-      grid-auto-rows: 60px;
+      grid-auto-rows: 40px;
       border-collapse: collapse;
       border-left: 1px solid #ccc;
       border-top: 1px solid #ccc;
       overflow: auto;
     }
-
     .cell {
       border-right: 1px solid #ccc;
       border-bottom: 1px solid #ccc;
       position: relative;
       background-color: #fff;
     }
-
     .cell-header {
       background-color: #e0e0e0;
       font-weight: bold;
       text-align: center;
-      line-height: 60px;
+      line-height: 40px;
     }
-
     .time-label {
       background-color: #eeeeee;
       text-align: center;
-      line-height: 60px;
+      line-height: 40px;
       font-weight: bold;
     }
-
     .dropped {
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
       position: absolute;
-      top: 5px;
-      left: 5px;
-      right: 5px;
-      bottom: 5px;
+      top: 2px;
+      left: 2px;
+      right: 2px;
+      bottom: 2px;
       background-color: #ffe082;
       border-radius: 6px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 14px;
+      font-size: 12px;
       font-weight: bold;
       cursor: move;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
   </style>
 </head>
 <body>
-
   <div id="topbar">
     <input type="text" id="studentName" placeholder="Enter your name here" />
     <button id="exportButton">Download Weekly Schedule (PDF)</button>
@@ -136,67 +124,67 @@
 
   <div id="main">
     <div id="sidebar-left">
-<h3>Classes</h3>
-<div class="class-block" draggable="true" style="background-color: #b3e5fc;">Algebra II</div>
-<div class="class-block" draggable="true" style="background-color: #c5e1a5;">Biology</div>
-<div class="class-block" draggable="true" style="background-color: #b2dfdb;">Career Investigation</div>
-<div class="class-block" draggable="true" style="background-color: #c5e1a5;">Chemistry</div>
-<div class="class-block" draggable="true" style="background-color: #d1c4e9;">Child Psychology I</div>
-<div class="class-block" draggable="true" style="background-color: #d1c4e9;">Child Psychology II</div>
-<div class="class-block" draggable="true" style="background-color: #b3e5fc;">College Algebra Prep</div>
-<div class="class-block" draggable="true" style="background-color: #eeeeee;">College Prep with AVID Strategies</div>
-<div class="class-block" draggable="true" style="background-color: #f8bbd0;">Communications</div>
-<div class="class-block" draggable="true" style="background-color: #f8bbd0;">Creative Writing</div>
-<div class="class-block" draggable="true" style="background-color: #ffe082;">Cultural Geography</div>
-<div class="class-block" draggable="true" style="background-color: #f0f4c3;">Digital Photography</div>
-<div class="class-block" draggable="true" style="background-color: #ffe082;">Economics</div>
-<div class="class-block" draggable="true" style="background-color: #d1c4e9;">Educational Experience</div>
-<div class="class-block" draggable="true" style="background-color: #f8bbd0;">English 10</div>
-<div class="class-block" draggable="true" style="background-color: #f8bbd0;">English 9</div>
-<div class="class-block" draggable="true" style="background-color: #c5e1a5;">Forensics</div>
-<div class="class-block" draggable="true" style="background-color: #b3e5fc;">Geometry</div>
-<div class="class-block" draggable="true" style="background-color: #eeeeee;">Google Meet</div>
-<div class="class-block" draggable="true" style="background-color: #ffccbc;">Guided Wellness</div>
-<div class="class-block" draggable="true" style="background-color: #ffccbc;">Health</div>
-</div>
+      <h3>Classes</h3>
+      <div class="class-block" draggable="true" style="background-color:#b3e5fc;">Algebra II</div>
+      <div class="class-block" draggable="true" style="background-color:#c5e1a5;">Biology</div>
+      <div class="class-block" draggable="true" style="background-color:#b2dfdb;">Career Investigation</div>
+      <div class="class-block" draggable="true" style="background-color:#c5e1a5;">Chemistry</div>
+      <div class="class-block" draggable="true" style="background-color:#d1c4e9;">Child Psychology I</div>
+      <div class="class-block" draggable="true" style="background-color:#d1c4e9;">Child Psychology II</div>
+      <div class="class-block" draggable="true" style="background-color:#b3e5fc;">College Algebra Prep</div>
+      <div class="class-block" draggable="true" style="background-color:#eeeeee;">College Prep with AVID Strategies</div>
+      <div class="class-block" draggable="true" style="background-color:#f8bbd0;">Communications</div>
+      <div class="class-block" draggable="true" style="background-color:#f8bbd0;">Creative Writing</div>
+      <div class="class-block" draggable="true" style="background-color:#ffe082;">Cultural Geography</div>
+      <div class="class-block" draggable="true" style="background-color:#f0f4c3;">Digital Photography</div>
+      <div class="class-block" draggable="true" style="background-color:#ffe082;">Economics</div>
+      <div class="class-block" draggable="true" style="background-color:#f8bbd0;">English 10</div>
+      <div class="class-block" draggable="true" style="background-color:#f8bbd0;">English 9</div>
+      <div class="class-block" draggable="true" style="background-color:#c5e1a5;">Forensics</div>
+      <div class="class-block" draggable="true" style="background-color:#b3e5fc;">Geometry</div>
+      <div class="class-block" draggable="true" style="background-color:#eeeeee;">Google Meet</div>
+      <div class="class-block" draggable="true" style="background-color:#ffccbc;">Guided Wellness</div>
+      <div class="class-block" draggable="true" style="background-color:#ffccbc;">Health</div>
+    </div>
 
-<div id="schedule"></div>
+    <div id="schedule"></div>
 
     <div id="sidebar-right">
-<h3>Classes</h3>
-<div class="class-block" draggable="true" style="background-color: #d1c4e9;">Interior Design</div>
-<div class="class-block" draggable="true" style="background-color: #b3e5fc;">Intermediate Algebra</div>
-<div class="class-block" draggable="true" style="background-color: #d1c4e9;">Intro to Education</div>
-<div class="class-block" draggable="true" style="background-color: #d1c4e9;">Intro to Foods</div>
-<div class="class-block" draggable="true" style="background-color: #b2dfdb;">Investing 101</div>
-<div class="class-block" draggable="true" style="background-color: #b2dfdb;">Personal Finance</div>
-<div class="class-block" draggable="true" style="background-color: #ffccbc;">Personal Wellness</div>
-<div class="class-block" draggable="true" style="background-color: #c5e1a5;">Physical Earth Science</div>
-<div class="class-block" draggable="true" style="background-color: #b3e5fc;">Precalculus</div>
-<div class="class-block" draggable="true" style="background-color: #ffe082;">Psychology</div>
-<div class="class-block" draggable="true" style="background-color: #c5e1a5;">Science or Myth</div>
-<div class="class-block" draggable="true" style="background-color: #ffe082;">Sociology</div>
-<div class="class-block" draggable="true" style="background-color: #f8bbd0;">Speech</div>
-<div class="class-block" draggable="true" style="background-color: #b2dfdb;">Travel and Tourism</div>
-<div class="class-block" draggable="true" style="background-color: #ffe082;">US Government</div>
-<div class="class-block" draggable="true" style="background-color: #ffe082;">US History</div>
-<div class="class-block" draggable="true" style="background-color: #f8bbd0;">US Literature</div>
-<div class="class-block" draggable="true" style="background-color: #f0f4c3;">Video Production</div>
-<div class="class-block" draggable="true" style="background-color: #eeeeee;">Work Based Learning</div>
-<div class="class-block" draggable="true" style="background-color: #ffe082;">World History</div>
-<div class="class-block" draggable="true" style="background-color: #f8bbd0;">World Literature</div>
-</div>
-</div>
-  </div>
+      <h3>Classes</h3>
+      <div class="class-block" draggable="true" style="background-color:#d1c4e9;">Interior Design</div>
+      <div class="class-block" draggable="true" style="background-color:#b3e5fc;">Intermediate Algebra</div>
+      <div class="class-block" draggable="true" style="background-color:#d1c4e9;">Intro to Education</div>
+      <div class="class-block" draggable="true" style="background-color:#d1c4e9;">Intro to Foods</div>
+      <div class="class-block" draggable="true" style="background-color:#b2dfdb;">Investing 101</div>
+      <div class="class-block" draggable="true" style="background-color:#b2dfdb;">Personal Finance</div>
+      <div class="class-block" draggable="true" style="background-color:#ffccbc;">Personal Wellness</div>
+      <div class="class-block" draggable="true" style="background-color:#c5e1a5;">Physical Earth Science</div>
+      <div class="class-block" draggable="true" style="background-color:#b3e5fc;">Precalculus</div>
+      <div class="class-block" draggable="true" style="background-color:#ffe082;">Psychology</div>
+      <div class="class-block" draggable="true" style="background-color:#c5e1a5;">Science or Myth</div>
+      <div class="class-block" draggable="true" style="background-color:#ffe082;">Sociology</div>
+      <div class="class-block" draggable="true" style="background-color:#f8bbd0;">Speech</div>
+      <div class="class-block" draggable="true" style="background-color:#b2dfdb;">Travel and Tourism</div>
+      <div class="class-block" draggable="true" style="background-color:#ffe082;">US Government</div>
+      <div class="class-block" draggable="true" style="background-color:#ffe082;">US History</div>
+      <div class="class-block" draggable="true" style="background-color:#f8bbd0;">US Literature</div>
+      <div class="class-block" draggable="true" style="background-color:#f0f4c3;">Video Production</div>
+      <div class="class-block" draggable="true" style="background-color:#eeeeee;">Work Based Learning</div>
+      <div class="class-block" draggable="true" style="background-color:#ffe082;">World History</div>
+      <div class="class-block" draggable="true" style="background-color:#f8bbd0;">World Literature</div>
+    </div>
   </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   <script>
-    const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
-    const hours = ['7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', '8pm', '9pm'];
-    const schedule = document.getElementById("schedule");
+    const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+    const hours = Array.from({ length: 15 }, (_, i) => {
+      const h = i + 7;
+      return h < 12 ? `${h}am` : h === 12 ? "12pm" : `${h - 12}pm`;
+    });
 
-    schedule.appendChild(document.createElement("div")); // empty corner
+    const schedule = document.getElementById("schedule");
+    schedule.appendChild(document.createElement("div")); // top-left corner
     days.forEach(day => {
       const div = document.createElement("div");
       div.className = "cell cell-header";
@@ -205,11 +193,10 @@
     });
 
     hours.forEach(hour => {
-      const timeDiv = document.createElement("div");
-      timeDiv.className = "cell time-label";
-      timeDiv.textContent = hour;
-      schedule.appendChild(timeDiv);
-
+      const label = document.createElement("div");
+      label.className = "cell time-label";
+      label.textContent = hour;
+      schedule.appendChild(label);
       days.forEach(day => {
         const cell = document.createElement("div");
         cell.className = "cell";
@@ -220,7 +207,6 @@
     });
 
     let draggedClassName = "";
-
     document.querySelectorAll(".class-block").forEach(block => {
       block.addEventListener("dragstart", e => {
         draggedClassName = e.target.textContent;
@@ -229,9 +215,7 @@
 
     function handleDrop(e) {
       if (!draggedClassName) return;
-      if (e.target.classList.contains("cell")) {
-        e.target.innerHTML = "";
-      }
+      if (e.target.classList.contains("cell")) e.target.innerHTML = "";
       const newBlock = document.createElement("div");
       newBlock.className = "dropped";
       newBlock.textContent = draggedClassName;
@@ -250,11 +234,15 @@
         filename: name ? name.replace(/\s+/g, "_").toLowerCase() + '_weekly_schedule.pdf' : 'weekly_schedule.pdf',
         image: { type: 'jpeg', quality: 0.98 },
         html2canvas: { scale: 2 },
-        jsPDF: { unit: 'in', format: 'letter', orientation: 'landscape' }
+        jsPDF: { unit: 'in', format: [11, 8.5], orientation: 'landscape' }
       };
-      html2pdf().from(document.getElementById("schedule")).set(opt).save();
+      const clone = document.getElementById("schedule").cloneNode(true);
+      clone.style.transform = "scale(0.7)";
+      clone.style.transformOrigin = "top left";
+      clone.style.width = "142.85%";
+      document.body.appendChild(clone);
+      html2pdf().from(clone).set(opt).save().then(() => clone.remove());
     });
   </script>
-
 </body>
 </html>
