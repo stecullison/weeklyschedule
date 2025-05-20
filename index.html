@@ -134,7 +134,7 @@
   <div id="main">
     <div id="sidebar-left">
       <h3>Classes</h3>
-      <div class="class-block" draggable="true" style="background-color: #f8bbd0;">Algebra II</div>
+      <div class="class-block" draggable="true" style="background-color: #b3e5fc;">Algebra II</div>
       <div class="class-block" draggable="true" style="background-color: #b2dfdb;">Career Investigation</div>
       <div class="class-block" draggable="true" style="background-color: #c5e1a5;">Chemistry</div>
       <div class="class-block" draggable="true" style="background-color: #d1c4e9;">Child Psychology I</div>
@@ -142,31 +142,43 @@
       <div class="class-block" draggable="true" style="background-color: #f0f4c3;">Digital Photography</div>
       <div class="class-block" draggable="true" style="background-color: #f8bbd0;">English 10</div>
       <div class="class-block" draggable="true" style="background-color: #f8bbd0;">English 9</div>
+      <div class="class-block" draggable="true" style="background-color: #ffe082;">Economics</div>
       <div class="class-block" draggable="true" style="background-color: #eeeeee;">Google Meet</div>
       <div class="class-block" draggable="true" style="background-color: #ffccbc;">Guided Wellness</div>
       <div class="class-block" draggable="true" style="background-color: #ffccbc;">Health</div>
       <div class="class-block" draggable="true" style="background-color: #b3e5fc;">Intermediate Algebra</div>
       <div class="class-block" draggable="true" style="background-color: #d1c4e9;">Interior Design</div>
       <div class="class-block" draggable="true" style="background-color: #b2dfdb;">Investing 101</div>
+      <div class="class-block" draggable="true" style="background-color: #d1c4e9;">Intro to Education</div>
+      <div class="class-block" draggable="true" style="background-color: #d1c4e9;">Intro to Foods</div>
+      <div class="class-block" draggable="true" style="background-color: #ffe082;">US History</div>
+      <div class="class-block" draggable="true" style="background-color: #ffe082;">US Government</div>
+      <div class="class-block" draggable="true" style="background-color: #ffe082;">Sociology</div>
     </div>
 
     <div id="schedule"></div>
 
     <div id="sidebar-right">
       <h3>Classes</h3>
-      <div class="class-block" draggable="true" style="background-color: #d1c4e9;">Intro to Education</div>
-      <div class="class-block" draggable="true" style="background-color: #d1c4e9;">Intro to Foods</div>
-      <div class="class-block" draggable="true" style="background-color: #f0f4c3;">Video Production</div>
-      <div class="class-block" draggable="true" style="background-color: #b2dfdb;">Personal Finance</div>
+      <div class="class-block" draggable="true" style="background-color: #ffe082;">Psychology</div>
       <div class="class-block" draggable="true" style="background-color: #ffccbc;">Personal Wellness</div>
+      <div class="class-block" draggable="true" style="background-color: #b2dfdb;">Personal Finance</div>
       <div class="class-block" draggable="true" style="background-color: #b3e5fc;">Precalculus</div>
-      <div class="class-block" draggable="true" style="background-color: #c5e1a5;">Science or Myth</div>
       <div class="class-block" draggable="true" style="background-color: #f8bbd0;">Speech</div>
-      <div class="class-block" draggable="true" style="background-color: #ffe082;">US Government</div>
-      <div class="class-block" draggable="true" style="background-color: #ffe082;">US History</div>
+      <div class="class-block" draggable="true" style="background-color: #c5e1a5;">Science or Myth</div>
+      <div class="class-block" draggable="true" style="background-color: #c5e1a5;">Physical Earth Science</div>
+      <div class="class-block" draggable="true" style="background-color: #b3e5fc;">Geometry</div>
+      <div class="class-block" draggable="true" style="background-color: #f8bbd0;">Creative Writing</div>
+      <div class="class-block" draggable="true" style="background-color: #c5e1a5;">Biology</div>
+      <div class="class-block" draggable="true" style="background-color: #b3e5fc;">College Algebra Prep</div>
+      <div class="class-block" draggable="true" style="background-color: #eeeeee;">College Prep with AVID Strategies</div>
+      <div class="class-block" draggable="true" style="background-color: #eeeeee;">Work Based Learning</div>
       <div class="class-block" draggable="true" style="background-color: #f8bbd0;">US Literature</div>
-      <div class="class-block" draggable="true" style="background-color: #b2dfdb;">Travel and Tourism</div>
+      <div class="class-block" draggable="true" style="background-color: #ffe082;">World History</div>
+      <div class="class-block" draggable="true" style="background-color: #ffe082;">Cultural Geography</div>
       <div class="class-block" draggable="true" style="background-color: #f8bbd0;">World Literature</div>
+      <div class="class-block" draggable="true" style="background-color: #f8bbd0;">Communications</div>
+      <div class="class-block" draggable="true" style="background-color: #f0f4c3;">Video Production</div>
     </div>
   </div>
 
@@ -237,9 +249,9 @@
       };
 
       const clone = document.getElementById("schedule").cloneNode(true);
-      clone.style.transform = "scale(0.75)";
+      clone.style.transform = "scale(0.7)";
       clone.style.transformOrigin = "top left";
-      clone.style.width = "133.33%";
+      clone.style.width = "142.85%";
       document.body.appendChild(clone);
       html2pdf().from(clone).set(opt).save().then(() => clone.remove());
     });
