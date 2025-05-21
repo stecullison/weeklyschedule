@@ -4,45 +4,30 @@
   <meta charset="UTF-8">
   <title>Weekly Schedule Planner</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      display: flex; flex-direction: column;
-      margin: 0; height: 100vh; overflow: hidden;
+    body { font-family: Arial, sans-serif; display: flex; flex-direction: column; margin: 0; height: 100vh; overflow: hidden; }
+    #topbar { padding: 10px; background: #f0f0f0; border-bottom: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    #exportButton, #exportImageButton {
+      padding: 10px 15px; margin-right: 8px;
+      background: #4caf50; color: white; border: none; border-radius: 4px;
+      cursor: pointer; font-size: 14px;
     }
-    #topbar {
-      padding: 10px; background: #f0f0f0; border-bottom: 1px solid #ccc;
-      display: flex; justify-content: space-between; align-items: center;
-    }
-    #exportButton {
-      padding: 10px 15px; background: #4caf50; color: white;
-      border: none; border-radius: 4px; cursor: pointer; font-size: 14px;
-    }
-    #version {
-      font-size: 10px; color: #666; margin-left: 12px;
-      font-family: monospace;
-    }
-    #studentName {
-      padding: 8px; font-size: 14px; width: 250px;
-    }
-    #main {
-      display: flex; flex-grow: 1; overflow: hidden;
-    }
+    #studentName { padding: 8px; font-size: 14px; width: 250px; }
+    #version { font-size:10px; color:#666; margin-left:12px; font-family:monospace; }
+    #main { display: flex; flex-grow: 1; overflow: hidden; }
     #sidebar-left, #sidebar-right {
-      width: 260px; background: #f4f4f4; padding: 10px;
-      box-sizing: border-box; overflow-y: auto;
-      display: flex; flex-direction: column; align-content: flex-start;
+      width: 260px; background: #f4f4f4; padding: 10px; box-sizing: border-box;
+      overflow-y: auto; display: flex; flex-direction: column; align-content: flex-start;
     }
-    #sidebar-right { border-left: 1px solid #ccc; }
+    #sidebar-right { border-left:1px solid #ccc; }
     .class-block {
-      font-size: 12px; padding: 6px; margin: 4px 0; line-height: 1.2;
-      color: #000; text-align: center; border-radius: 6px;
-      cursor: grab; font-weight: bold;
-      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+      font-size:12px; padding:6px; margin:4px 0; line-height:1.2;
+      color:#000; text-align:center; border-radius:6px;
+      cursor:grab; font-weight:bold; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
     }
     #schedule {
-      flex-grow: 1; display: grid;
-      grid-template-columns: 80px repeat(7,1fr);
-      grid-auto-rows: 40px; border-left:1px solid #ccc;
+      flex-grow:1; display:grid;
+      grid-template-columns:80px repeat(7,1fr);
+      grid-auto-rows:40px; border-left:1px solid #ccc;
       border-top:1px solid #ccc; overflow:auto;
     }
     .cell {
@@ -59,18 +44,19 @@
     }
     .dropped {
       position:absolute; top:2px; left:2px; right:2px; bottom:2px;
-      border-radius:6px; display:flex; align-items:center;
-      justify-content:center; font-size:12px; font-weight:bold;
-      cursor:move; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+      border-radius:6px; display:flex; align-items:center; justify-content:center;
+      font-size:12px; font-weight:bold; cursor:move;
+      white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
     }
   </style>
 </head>
 <body>
   <div id="topbar">
     <input id="studentName" placeholder="Enter your name here">
-    <div style="display:flex; align-items:center;">
+    <div>
       <button id="exportButton">Download Weekly Schedule (PDF)</button>
-      <span id="version">Version: 2025.05.20.1625‑spfix3</span>
+      <button id="exportImageButton">Download as PNG</button>
+      <span id="version">Version: 2025.05.21.0945‑img2</span>
     </div>
   </div>
 
@@ -129,25 +115,37 @@
     </div>
   </div>
 
-  <!-- UMD builds expose window.jspdf.jsPDF -->
+  <!-- Libraries -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.23/jspdf.plugin.autotable.min.js"></script>
   <script>
-    // build on-screen schedule
+    // Color map for cells
+    const courseColors = {
+      "Algebra II":"#b3e5fc","Biology":"#c5e1a5","Career Investigation":"#b2dfdb","Chemistry":"#c5e1a5",
+      "Child Psychology I":"#d1c4e9","Child Psychology II":"#d1c4e9","College Algebra Prep":"#b3e5fc",
+      "College Prep with AVID Strategies":"#eeeeee","Communications":"#f8bbd0","Creative Writing":"#f8bbd0",
+      "Cultural Geography":"#ffe082","Digital Photography":"#f0f4c3","Economics":"#ffe082","English 10":"#f8bbd0",
+      "English 9":"#f8bbd0","Forensics":"#c5e1a5","Geometry":"#b3e5fc","Google Meet":"#eeeeee",
+      "Guided Wellness":"#ffccbc","Health":"#ffccbc","Interior Design":"#d1c4e9","Intermediate Algebra":"#b3e5fc",
+      "Intro to Education":"#d1c4e9","Intro to Foods":"#d1c4e9","Investing 101":"#b2dfdb","Personal Finance":"#b2dfdb",
+      "Personal Wellness":"#ffccbc","Physical Earth Science":"#c5e1a5","Precalculus":"#b3e5fc","Psychology":"#ffe082",
+      "Science or Myth":"#c5e1a5","Sociology":"#ffe082","Speech":"#f8bbd0","Travel and Tourism":"#b2dfdb",
+      "US Government":"#ffe082","US History":"#ffe082","US Literature":"#f8bbd0","Video Production":"#f0f4c3",
+      "Work Based Learning":"#eeeeee","World History":"#ffe082","World Literature":"#f8bbd0"
+    };
+
+    // Build on-screen schedule
     const days = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
-    const hours = Array.from({length:15},(_,i)=>{const h=i+7;return h<12?`${h}am`:(h===12?"12pm":`${h-12}pm`);});
+    const hours = Array.from({length:15},(_,i)=>{const h=i+7; return h<12?`${h}am`:(h===12?"12pm":`${h-12}pm`);});
     const schedule = document.getElementById("schedule");
     schedule.appendChild(document.createElement("div"));
-    days.forEach(d=>{const hd=document.createElement("div"); hd.className="cell cell-header"; hd.textContent=d; schedule.appendChild(hd);});
+    days.forEach(d=>{ const hd=document.createElement("div"); hd.className="cell cell-header"; hd.textContent=d; schedule.appendChild(hd); });
     hours.forEach(h=>{ const tl=document.createElement("div"); tl.className="cell time-label"; tl.textContent=h; schedule.appendChild(tl);
-      days.forEach(_=>{ const c=document.createElement("div"); c.className="cell";
-        c.addEventListener("dragover",e=>e.preventDefault());
-        c.addEventListener("drop",handleDrop);
-        schedule.appendChild(c);
-      });
+      days.forEach(_=>{ const c=document.createElement("div"); c.className="cell"; c.addEventListener("dragover",e=>e.preventDefault()); c.addEventListener("drop",handleDrop); schedule.appendChild(c); });
     });
     let dragged="";
-    document.querySelectorAll(".class-block").forEach(b=> b.addEventListener("dragstart",e=> dragged=e.target.textContent ));
+    document.querySelectorAll(".class-block").forEach(b=>b.addEventListener("dragstart",e=>dragged=e.target.textContent));
     function handleDrop(e){
       if(!dragged||!e.target.classList.contains("cell")) return;
       e.target.innerHTML="";
@@ -155,81 +153,55 @@
       nb.className="dropped";
       nb.textContent=dragged;
       nb.draggable=true;
+      nb.style.backgroundColor = courseColors[dragged] || "#ffe082";
       nb.addEventListener("dragstart",ee=>{ dragged=ee.target.textContent; ee.target.parentNode.innerHTML=""; });
       e.target.appendChild(nb);
     }
 
-    // Table color map
-    const courseColors = {
-      "Algebra II":"#b3e5fc","Biology":"#c5e1a5","Career Investigation":"#b2dfdb","Chemistry":"#c5e1a5",
-      "Child Psychology I":"#d1c4e9","Child Psychology II":"#d1c4e9","College Algebra Prep":"#b3e5fc",
-      "College Prep with AVID Strategies":"#eeeeee","Communications":"#f8bbd0","Creative Writing":"#f8bbd0",
-      "Cultural Geography":"#ffe082","Digital Photography":"#f0f4c3","Economics":"#ffe082","English 10":"#f8bbd0",
-      "English 9":"#f8bbd0","Forensics":"#c5e1a5","Geometry":"#b3e5fc","Google Meet":"#eeeeee",
-      "Guided Wellness":"#ffccbc","Health":"#ffccbc","Interior Design":"#d1c4e9","Intermediate Algebra":"#b3e5fc",
-      "Intro to Education":"#d1c4e9","Intro to Foods":"#d1c4e9","Investing 101":"#b2dfdb","Personal Finance":"#b2dfdb",
-      "Personal Wellness":"#ffccbc","Physical Earth Science":"#c5e1a5","Precalculus":"#b3e5fc",
-      "Psychology":"#ffe082","Science or Myth":"#c5e1a5","Sociology":"#ffe082","Speech":"#f8bbd0",
-      "Travel and Tourism":"#b2dfdb","US Government":"#ffe082","US History":"#ffe082","US Literature":"#f8bbd0",
-      "Video Production":"#f0f4c3","Work Based Learning":"#eeeeee","World History":"#ffe082","World Literature":"#f8bbd0"
-    };
-
-    // PDF export via jsPDF + autoTable
+    // PDF export
     document.getElementById("exportButton").addEventListener("click",()=>{
       const { jsPDF } = window.jspdf;
-      const doc = new jsPDF({ orientation:'landscape', unit:'pt', format:'letter' });
-
-      // Student name
-      const studentName = document.getElementById("studentName").value.trim() || "Unnamed Student";
-      const filename = studentName.replace(/\s+/g,"_").toLowerCase() + '_weekly_schedule.pdf';
-
-      // Print student name
-      const pw = doc.internal.pageSize.getWidth();
+      const doc = new jsPDF({orientation:'landscape',unit:'pt',format:'letter'});
+      const student = document.getElementById("studentName").value.trim()||"Unnamed Student";
       doc.setFontSize(12);
-      doc.text(studentName, pw/2, 30, { align:'center' });
-
-      // Build table data
+      doc.text(student, doc.internal.pageSize.getWidth()/2,30,{align:'center'});
       const body = hours.map((h,i)=>{
-        const row = [h];
+        const row=[h];
         for(let c=0;c<7;c++){
-          const idx = 8 + i*8 + 1 + c;
-          const cell = schedule.children[idx];
-          row.push(cell.firstChild?cell.firstChild.textContent:"");
+          const idx=8+i*8+1+c, cell=schedule.children[idx];
+          row.push(cell.firstChild?.textContent||"");
         }
         return row;
       });
-
-      // Generate PDF
       doc.autoTable({
-        head: [["Time", ...days]],
-        body: body,
-        styles:      { fontSize:8, cellPadding:2, halign:'center', valign:'middle' },
-        headStyles:  { fillColor:[76,175,80], textColor:255, fontStyle:'bold' },
-        theme:       'grid',
-        startY:      60,
-        margin:      { top:50,left:30,right:30,bottom:30 },
-        rowHeight:   28,
-        rowPageBreak:'avoid',
-        didParseCell: (data) => {
-          // skip header/time column
-          if(data.section==='body' && data.column.index>0 && data.cell.raw){
-            const color = courseColors[data.cell.raw];
-            if(color){
-              const c = color.replace('#','');
-              const r = parseInt(c.substr(0,2),16),
-                    g = parseInt(c.substr(2,2),16),
-                    b = parseInt(c.substr(4,2),16);
-              data.cell.styles.fillColor = [r,g,b];
+        head:[["Time",...days]],
+        body, theme:'grid',
+        styles:{fontSize:8,cellPadding:2,halign:'center',valign:'middle'},
+        headStyles:{fillColor:[76,175,80],textColor:255,fontStyle:'bold'},
+        startY:60, margin:{top:50,left:30,right:30,bottom:30}, rowHeight:28, rowPageBreak:'avoid',
+        didParseCell: data=>{
+          if(data.section==='body'&&data.column.index>0&&data.cell.raw){
+            const col = courseColors[data.cell.raw];
+            if(col){
+              const c=col.slice(1);
+              data.cell.styles.fillColor=[parseInt(c.substr(0,2),16),parseInt(c.substr(2,2),16),parseInt(c.substr(4,2),16)];
             }
           }
         },
-        didDrawPage: () => {
-          doc.setFontSize(10);
-          doc.text(document.getElementById("version").textContent,30,40);
-        }
+        didDrawPage:()=>{ doc.setFontSize(10); doc.text(document.getElementById("version").textContent,30,40); }
       });
+      doc.save(student.replace(/\s+/g,"_").toLowerCase()+'_weekly_schedule.pdf');
+    });
 
-      doc.save(filename);
+    // PNG export: capture only the schedule grid
+    document.getElementById("exportImageButton").addEventListener("click",()=>{
+      html2canvas(document.getElementById("schedule"), { scale: 2 }).then(canvas=>{
+        const link=document.createElement("a");
+        link.href = canvas.toDataURL("image/png");
+        const name = document.getElementById("studentName").value.trim()||"schedule";
+        link.download = name.replace(/\s+/g,"_").toLowerCase()+"_weekly_schedule.png";
+        link.click();
+      });
     });
   </script>
 </body>
