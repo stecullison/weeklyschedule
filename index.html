@@ -18,7 +18,8 @@
       border: none; border-radius: 4px; cursor: pointer; font-size: 14px;
     }
     #version {
-      font-size: 10px; color: #666; margin-left: 10px;
+      font-size: 10px; color: #666; margin-left: 12px;
+      font-family: monospace;
     }
     #studentName {
       padding: 8px; font-size: 14px; width: 250px;
@@ -27,7 +28,7 @@
       display: flex; flex-grow: 1; overflow: hidden;
     }
     #sidebar-left, #sidebar-right {
-      width: 250px; background: #f4f4f4; padding: 10px;
+      width: 260px; background: #f4f4f4; padding: 10px;
       box-sizing: border-box; overflow-y: auto;
       display: flex; flex-direction: column; align-content: flex-start;
     }
@@ -49,7 +50,7 @@
       position:relative; background:#fff;
     }
     .cell-header {
-      background:#e0e0e0; font-weight:bold;
+      background:#4caf50; color:white; font-weight:bold;
       text-align:center; line-height:40px;
     }
     .time-label {
@@ -58,19 +59,18 @@
     }
     .dropped {
       position:absolute; top:2px; left:2px; right:2px; bottom:2px;
-      background:#ffe082; border-radius:6px;
-      display:flex; align-items:center; justify-content:center;
-      font-size:12px; font-weight:bold; cursor:move;
-      white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+      border-radius:6px; display:flex; align-items:center;
+      justify-content:center; font-size:12px; font-weight:bold;
+      cursor:move; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
     }
   </style>
 </head>
 <body>
   <div id="topbar">
     <input id="studentName" placeholder="Enter your name here">
-    <div>
+    <div style="display:flex; align-items:center;">
       <button id="exportButton">Download Weekly Schedule (PDF)</button>
-      <span id="version">Version: 2025.05.20.1615‑spfix2</span>
+      <span id="version">Version: 2025.05.20.1625‑spfix3</span>
     </div>
   </div>
 
@@ -82,8 +82,8 @@
       <div class="class-block" draggable="true" style="background:#c5e1a5;">Biology</div>
       <div class="class-block" draggable="true" style="background:#b2dfdb;">Career Investigation</div>
       <div class="class-block" draggable="true" style="background:#c5e1a5;">Chemistry</div>
-      <div class="class-block" draggable="true" style="background:#d1c4e9;">Child Psychology I</div>
-      <div class="class-block" draggable="true" style="background:#d1c4e9;">Child Psychology II</div>
+      <div class="class-block" draggable="true" style="background:#d1c4e9;">Child Psychology I</div>
+      <div class="class-block" draggable="true" style="background:#d1c4e9;">Child Psychology II</div>
       <div class="class-block" draggable="true" style="background:#b3e5fc;">College Algebra Prep</div>
       <div class="class-block" draggable="true" style="background:#eeeeee;">College Prep with AVID Strategies</div>
       <div class="class-block" draggable="true" style="background:#f8bbd0;">Communications</div>
@@ -91,12 +91,12 @@
       <div class="class-block" draggable="true" style="background:#ffe082;">Cultural Geography</div>
       <div class="class-block" draggable="true" style="background:#f0f4c3;">Digital Photography</div>
       <div class="class-block" draggable="true" style="background:#ffe082;">Economics</div>
-      <div class="class-block" draggable="true" style="background:#f8bbd0;">English 10</div>
-      <div class="class-block" draggable="true" style="background:#f8bbd0;">English 9</div>
+      <div class="class-block" draggable="true" style="background:#f8bbd0;">English 10</div>
+      <div class="class-block" draggable="true" style="background:#f8bbd0;">English 9</div>
       <div class="class-block" draggable="true" style="background:#c5e1a5;">Forensics</div>
       <div class="class-block" draggable="true" style="background:#b3e5fc;">Geometry</div>
       <div class="class-block" draggable="true" style="background:#eeeeee;">Google Meet</div>
-      <div class="class-block" draggable="true" style="background:#ffccbc;">Guided Wellness</div>
+      <div class="class-block" draggable="true" style="background:#ffccbc;">Guided Wellness</div>
       <div class="class-block" draggable="true" style="background:#ffccbc;">Health</div>
     </div>
 
@@ -109,23 +109,23 @@
       <div class="class-block" draggable="true" style="background:#b3e5fc;">Intermediate Algebra</div>
       <div class="class-block" draggable="true" style="background:#d1c4e9;">Intro to Education</div>
       <div class="class-block" draggable="true" style="background:#d1c4e9;">Intro to Foods</div>
-      <div class="class-block" draggable="true" style="background:#b2dfdb;">Investing 101</div>
-      <div class="class-block" draggable="true" style="background:#b2dfdb;">Personal Finance</div>
-      <div class="class-block" draggable="true" style="background:#ffccbc;">Personal Wellness</div>
-      <div class="class-block" draggable="true" style="background:#c5e1a5;">Physical Earth Science</div>
+      <div class="class-block" draggable="true" style="background:#b2dfdb;">Investing 101</div>
+      <div class="class-block" draggable="true" style="background:#b2dfdb;">Personal Finance</div>
+      <div class="class-block" draggable="true" style="background:#ffccbc;">Personal Wellness</div>
+      <div class="class-block" draggable="true" style="background:#c5e1a5;">Physical Earth Science</div>
       <div class="class-block" draggable="true" style="background:#b3e5fc;">Precalculus</div>
       <div class="class-block" draggable="true" style="background:#ffe082;">Psychology</div>
-      <div class="class-block" draggable="true" style="background:#c5e1a5;">Science or Myth</div>
+      <div class="class-block" draggable="true" style="background:#c5e1a5;">Science or Myth</div>
       <div class="class-block" draggable="true" style="background:#ffe082;">Sociology</div>
       <div class="class-block" draggable="true" style="background:#f8bbd0;">Speech</div>
-      <div class="class-block" draggable="true" style="background:#b2dfdb;">Travel and Tourism</div>
-      <div class="class-block" draggable="true" style="background:#ffe082;">US Government</div>
-      <div class="class-block" draggable="true" style="background:#ffe082;">US History</div>
-      <div class="class-block" draggable="true" style="background:#f8bbd0;">US Literature</div>
-      <div class="class-block" draggable="true" style="background:#f0f4c3;">Video Production</div>
-      <div class="class-block" draggable="true" style="background:#eeeeee;">Work Based Learning</div>
-      <div class="class-block" draggable="true" style="background:#ffe082;">World History</div>
-      <div class="class-block" draggable="true" style="background:#f8bbd0;">World Literature</div>
+      <div class="class-block" draggable="true" style="background:#b2dfdb;">Travel and Tourism</div>
+      <div class="class-block" draggable="true" style="background:#ffe082;">US Government</div>
+      <div class="class-block" draggable="true" style="background:#ffe082;">US History</div>
+      <div class="class-block" draggable="true" style="background:#f8bbd0;">US Literature</div>
+      <div class="class-block" draggable="true" style="background:#f0f4c3;">Video Production</div>
+      <div class="class-block" draggable="true" style="background:#eeeeee;">Work Based Learning</div>
+      <div class="class-block" draggable="true" style="background:#ffe082;">World History</div>
+      <div class="class-block" draggable="true" style="background:#f8bbd0;">World Literature</div>
     </div>
   </div>
 
@@ -133,53 +133,102 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.23/jspdf.plugin.autotable.min.js"></script>
   <script>
-    // Build on-screen grid
+    // build on-screen schedule
     const days = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
     const hours = Array.from({length:15},(_,i)=>{const h=i+7;return h<12?`${h}am`:(h===12?"12pm":`${h-12}pm`);});
     const schedule = document.getElementById("schedule");
     schedule.appendChild(document.createElement("div"));
-    days.forEach(d=>{const hd=document.createElement("div");hd.className="cell cell-header";hd.textContent=d;schedule.appendChild(hd);});
-    hours.forEach(h=>{const tl=document.createElement("div");tl.className="cell time-label";tl.textContent=h;schedule.appendChild(tl);
-      days.forEach(_=>{const c=document.createElement("div");c.className="cell";c.addEventListener("dragover",e=>e.preventDefault());c.addEventListener("drop",handleDrop);schedule.appendChild(c);});
+    days.forEach(d=>{const hd=document.createElement("div"); hd.className="cell cell-header"; hd.textContent=d; schedule.appendChild(hd);});
+    hours.forEach(h=>{ const tl=document.createElement("div"); tl.className="cell time-label"; tl.textContent=h; schedule.appendChild(tl);
+      days.forEach(_=>{ const c=document.createElement("div"); c.className="cell";
+        c.addEventListener("dragover",e=>e.preventDefault());
+        c.addEventListener("drop",handleDrop);
+        schedule.appendChild(c);
+      });
     });
     let dragged="";
-    document.querySelectorAll(".class-block").forEach(b=>b.addEventListener("dragstart",e=>dragged=e.target.textContent));
-    function handleDrop(e){if(!dragged||!e.target.classList.contains("cell"))return;e.target.innerHTML="";const nb=document.createElement("div");nb.className="dropped";nb.textContent=dragged;nb.draggable=true;nb.addEventListener("dragstart",ee=>{dragged=ee.target.textContent;ee.target.parentNode.innerHTML="";});e.target.appendChild(nb);}
+    document.querySelectorAll(".class-block").forEach(b=> b.addEventListener("dragstart",e=> dragged=e.target.textContent ));
+    function handleDrop(e){
+      if(!dragged||!e.target.classList.contains("cell")) return;
+      e.target.innerHTML="";
+      const nb=document.createElement("div");
+      nb.className="dropped";
+      nb.textContent=dragged;
+      nb.draggable=true;
+      nb.addEventListener("dragstart",ee=>{ dragged=ee.target.textContent; ee.target.parentNode.innerHTML=""; });
+      e.target.appendChild(nb);
+    }
 
-    // Export via jsPDF + AutoTable, forcing single‑page fit
+    // Table color map
+    const courseColors = {
+      "Algebra II":"#b3e5fc","Biology":"#c5e1a5","Career Investigation":"#b2dfdb","Chemistry":"#c5e1a5",
+      "Child Psychology I":"#d1c4e9","Child Psychology II":"#d1c4e9","College Algebra Prep":"#b3e5fc",
+      "College Prep with AVID Strategies":"#eeeeee","Communications":"#f8bbd0","Creative Writing":"#f8bbd0",
+      "Cultural Geography":"#ffe082","Digital Photography":"#f0f4c3","Economics":"#ffe082","English 10":"#f8bbd0",
+      "English 9":"#f8bbd0","Forensics":"#c5e1a5","Geometry":"#b3e5fc","Google Meet":"#eeeeee",
+      "Guided Wellness":"#ffccbc","Health":"#ffccbc","Interior Design":"#d1c4e9","Intermediate Algebra":"#b3e5fc",
+      "Intro to Education":"#d1c4e9","Intro to Foods":"#d1c4e9","Investing 101":"#b2dfdb","Personal Finance":"#b2dfdb",
+      "Personal Wellness":"#ffccbc","Physical Earth Science":"#c5e1a5","Precalculus":"#b3e5fc",
+      "Psychology":"#ffe082","Science or Myth":"#c5e1a5","Sociology":"#ffe082","Speech":"#f8bbd0",
+      "Travel and Tourism":"#b2dfdb","US Government":"#ffe082","US History":"#ffe082","US Literature":"#f8bbd0",
+      "Video Production":"#f0f4c3","Work Based Learning":"#eeeeee","World History":"#ffe082","World Literature":"#f8bbd0"
+    };
+
+    // PDF export via jsPDF + autoTable
     document.getElementById("exportButton").addEventListener("click",()=>{
       const { jsPDF } = window.jspdf;
-      const doc = new jsPDF({orientation:'landscape',unit:'pt',format:'letter'});
-      const studentName = document.getElementById("studentName").value.trim()||"Unnamed Student";
+      const doc = new jsPDF({ orientation:'landscape', unit:'pt', format:'letter' });
+
+      // Student name
+      const studentName = document.getElementById("studentName").value.trim() || "Unnamed Student";
       const filename = studentName.replace(/\s+/g,"_").toLowerCase() + '_weekly_schedule.pdf';
-      // print student name
+
+      // Print student name
       const pw = doc.internal.pageSize.getWidth();
       doc.setFontSize(12);
-      doc.text(studentName, pw/2, 30, {align:'center'});
-      // build table data
+      doc.text(studentName, pw/2, 30, { align:'center' });
+
+      // Build table data
       const body = hours.map((h,i)=>{
-        const row=[h];
+        const row = [h];
         for(let c=0;c<7;c++){
-          const idx=8+i*8+1+c;
-          const cell=schedule.children[idx];
+          const idx = 8 + i*8 + 1 + c;
+          const cell = schedule.children[idx];
           row.push(cell.firstChild?cell.firstChild.textContent:"");
         }
         return row;
       });
+
+      // Generate PDF
       doc.autoTable({
-        head:[["Time",...days]],
-        body,
-        styles:{fontSize:7,cellPadding:1,halign:'center',valign:'middle'},
-        theme:'grid',
-        startY:60,
-        margin:{top:50,left:30,right:30,bottom:30},
-        rowHeight:25,
+        head: [["Time", ...days]],
+        body: body,
+        styles:      { fontSize:8, cellPadding:2, halign:'center', valign:'middle' },
+        headStyles:  { fillColor:[76,175,80], textColor:255, fontStyle:'bold' },
+        theme:       'grid',
+        startY:      60,
+        margin:      { top:50,left:30,right:30,bottom:30 },
+        rowHeight:   28,
         rowPageBreak:'avoid',
-        didDrawPage:() => {
+        didParseCell: (data) => {
+          // skip header/time column
+          if(data.section==='body' && data.column.index>0 && data.cell.raw){
+            const color = courseColors[data.cell.raw];
+            if(color){
+              const c = color.replace('#','');
+              const r = parseInt(c.substr(0,2),16),
+                    g = parseInt(c.substr(2,2),16),
+                    b = parseInt(c.substr(4,2),16);
+              data.cell.styles.fillColor = [r,g,b];
+            }
+          }
+        },
+        didDrawPage: () => {
           doc.setFontSize(10);
           doc.text(document.getElementById("version").textContent,30,40);
         }
       });
+
       doc.save(filename);
     });
   </script>
